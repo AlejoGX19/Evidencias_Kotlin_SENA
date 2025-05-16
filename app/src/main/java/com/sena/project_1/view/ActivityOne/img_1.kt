@@ -2,8 +2,10 @@ package com.sena.project_1.view.ActivityOne
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,51 +22,50 @@ import androidx.compose.ui.unit.sp
 import com.sena.project_1.R
 
 @Composable
-fun Img_1(){
+fun Img_1() {
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item (){
-
+        item {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth().padding(top = 50.dp)
-            ){
-                Text(text = ".bibi",
+                    .fillMaxWidth()
+                    .padding(top = 50.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = ".bibi",
                     fontSize = 50.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterHorizontally)
-                        .padding(top = 20.dp)
+                    fontWeight = FontWeight.Bold
                 )
+
+                Spacer(modifier = Modifier.height(80.dp))
 
                 Image(
                     painter = painterResource(R.drawable.img1),
                     contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 50.dp)
-                        .size(350.dp)
-                        .align(alignment = Alignment.CenterHorizontally)
+                    modifier = Modifier.size(350.dp)
                 )
 
-                Text(text = "For students who want to become flight attendants",
+                Spacer(modifier = Modifier.height(50.dp))
+
+                Text(
+                    text = "For students who want to become flight attendants",
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterHorizontally)
-                        .padding(top = 50.dp)
-                        .padding(horizontal = 70.dp)
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 40.dp)
                 )
 
-                Text(text = "Communicate whith flight attendants, meet, find out useful information \n that will help you fulfill your dream",
+                Spacer(modifier = Modifier.height(50.dp))
+
+                Text(
+                    text = "Communicate with flight attendants, meet, find out useful information that will help you fulfill your dream.",
                     fontSize = 18.sp,
                     color = Color.Gray,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier
-
-                        .padding(top = 40.dp)
-                        .padding(horizontal = 35.dp),
-
+                    modifier = Modifier.padding(horizontal = 35.dp)
                 )
             }
         }
