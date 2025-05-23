@@ -19,10 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sena.project_1.Botones
 import com.sena.project_1.R
 
 @Composable
-fun Img_2() {
+fun Img_2(pagerState: Int) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -67,6 +68,7 @@ fun Img_2() {
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = 70.dp)
                 )
+                Botones(pagerState)
             }
         }
     }

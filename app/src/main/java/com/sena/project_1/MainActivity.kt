@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,11 +25,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sena.project_1.ui.theme.Project_1Theme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 import com.sena.project_1.view.ActivityOne.Img_1
 import com.sena.project_1.view.ActivityOne.Img_2
 import com.sena.project_1.view.ActivityOne.Img_3
+import com.sena.project_1.view.ActivityOne.Login
+import com.sena.project_1.view.ActivityOne.NavegateActivity
+import com.sena.project_1.view.ActivityOne.Register
+import com.sena.project_1.view.Navegate
 import com.sena.project_1.view.Scrol
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,14 +52,110 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Project_1Theme {
+                //Horizontal()
+                //Navegate()
                 //Scrol()
-                Img_1()
+                //Img_1()
                 //Img_2()
                 //Img_3()
+                //Login()
+                //Register()
+                NavegateActivity()
             }
         }
     }
 }
+
+@Composable
+fun Horizontal(navController: NavController){
+    val pagerState = rememberPagerState(pageCount = {3})
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(3000L)
+            val  nexPage = (pagerState.currentPage + 1 ) % 3
+            pagerState.animateScrollToPage(page = nexPage,
+                animationSpec = tween(600, easing = FastOutLinearInEasing ))
+        }
+    }
+    HorizontalPager(state = pagerState) { page ->
+        when(page){
+            0 -> Img_1(pagerState.currentPage)
+            1 -> Img_2(pagerState.currentPage)
+            2 -> Img_3(pagerState.currentPage, navController)
+            else -> Text(text = "No se encontro")
+        }
+    }
+
+}
+
+@Composable
+fun Botones(pagerState: Int){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 60.dp, horizontal = 30.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        repeat(3){ i ->
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 2.dp)
+                    .size(10.dp)
+                    .clip(RoundedCornerShape(50.dp))
+                    .background(if (pagerState == i) Color.Blue else Color.Gray)
+            ){ }
+
+        }
+    }
+}
+
+@Composable
+fun PrimeraVantana(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xff00d7f9)),
+        contentAlignment = Alignment.Center
+    )
+    {
+        Text(text = "Hola desde ventana 1",
+            modifier = Modifier.align(Alignment.Center))
+    }
+}
+
+@Composable
+fun SegundaVantana(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xff0b2d32)),
+        contentAlignment = Alignment.Center
+    )
+    {
+        Text(text = "Hola desde ventana 2",
+            modifier = Modifier.align(Alignment.Center))
+    }
+}
+
+@Composable
+fun TerceraVantana(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xff003423)),
+        contentAlignment = Alignment.Center
+    )
+    {
+        Text(text = "Hola desde ventana 3",
+            modifier = Modifier.align(Alignment.Center))
+    }
+}
+
+
+
+//----------------------------------------------------------------------------
+
+
 /*
 @Composable
 fun Base(texto1: String, texto2: String) {
@@ -87,7 +201,7 @@ fun Texto2(text: String){
         }
     }
 }*/*/
-
+/*
 @Composable
 fun Body(){
     Column(
@@ -109,4 +223,4 @@ fun GreetingPreview() {
         //Img_2()
         //Img_3()
     }
-}
+}*/
